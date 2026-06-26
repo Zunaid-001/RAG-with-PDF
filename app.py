@@ -24,7 +24,7 @@ embeddings = HuggingFaceEmbeddings(
 
 
 ## set up Streamlit 
-st.title("Conversational RAG With PDF uplaods")
+st.title("Conversational RAG With PDF Uploads")
 st.write("Upload Pdf's and chat with their content")
 
 ## Input the Groq API Key
