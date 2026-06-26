@@ -16,8 +16,11 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ['HF_TOKEN']=os.getenv("HF_TOKEN")
-embeddings=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+os.environ["HF_TOKEN"] = st.secrets["HF_TOKEN"]
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    cache_folder="./hf_cache"
+)
 
 
 ## set up Streamlit 
