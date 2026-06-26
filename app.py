@@ -4,7 +4,7 @@ import time
 from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_classic.chains.combine_documents.stuff import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
@@ -49,7 +49,7 @@ prompt = ChatPromptTemplate.from_template(
 def create_vector_embedding():
     if st.session_state.vectors is None:
         # Correct model name: "embedding-001" (no "models/")sentence
-        st.session_state.embeddings = embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+        st.session_state.embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
         st.session_state.loader = PyPDFDirectoryLoader("research_papers")
         st.session_state.docs = st.session_state.loader.load()
         st.session_state.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
