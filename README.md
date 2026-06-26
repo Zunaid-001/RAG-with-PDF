@@ -1,2 +1,3 @@
 # RAG-with-PDF
 This project is a Streamlit-based Conversational Retrieval-Augmented Generation (RAG) application that allows users to upload PDF documents and interact with their content through natural language queries. It integrates LangChain, Groq’s LLaMA-3 model, and HuggingFace embeddings to provide context-aware 
+This project is a Streamlit-based Conversational Retrieval-Augmented Generation (RAG) application that allows users to upload PDF documents and interact with their content through natural language queries. It integrates LangChain, Groq’s LLaMA-3 model, and HuggingFace embeddings to provide context-aware answers while maintaining a persistent chat history across sessions.
