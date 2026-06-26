@@ -13,12 +13,8 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 # Load environment variables
-load_dotenv(dotenv_path="D:/python with genAI/langchain/.env")
-google_key = os.getenv("GOOGLE_API_KEY")
-groq_key = os.getenv("GROQ_API_KEY")
+groq_key = st.secrets["GROQ_API_KEY"]
 
-if google_key:
-    os.environ['GOOGLE_API_KEY'] = google_key
 if groq_key:
     os.environ['GROQ_API_KEY'] = groq_key
     
