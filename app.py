@@ -24,7 +24,7 @@ embeddings = HuggingFaceEmbeddings(
 
 
 ## set up Streamlit 
-st.title("Conversational RAG With PDF uplaods and chat history")
+st.title("Conversational RAG With PDF uplaods")
 st.write("Upload Pdf's and chat with their content")
 
 ## Input the Groq API Key
@@ -33,17 +33,13 @@ api_key = st.secrets["GROQ_API_KEY"]
 ## Check if groq api key is provided
 if api_key:
     llm=ChatGroq(groq_api_key=api_key,model_name="llama-3.3-70b-versatile")
-
-    ## chat interface
-
+    
     session_id=st.text_input("Session ID",value="default_session")
-    ## statefully manage chat history
 
     if 'store' not in st.session_state:
         st.session_state.store={}
 
     uploaded_files=st.file_uploader("Choose A PDf file",type="pdf",accept_multiple_files=True)
-    ## Process uploaded  PDF's
     if uploaded_files:
         documents=[]
         for uploaded_file in uploaded_files:
@@ -56,7 +52,6 @@ if api_key:
             docs=loader.load()
             documents.extend(docs)
 
-    # Split and create embeddings for the documents
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=5000, chunk_overlap=500)
         splits = text_splitter.split_documents(documents)
         vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
@@ -79,9 +74,6 @@ if api_key:
         
         history_aware_retriever=create_history_aware_retriever(llm,retriever,contextualize_q_prompt)
 
-        ## Answer question
-
-        # Answer question
         system_prompt = (
                 "You are an assistant for question-answering tasks. "
                 "Use the following pieces of retrieved context to answer "
@@ -121,11 +113,9 @@ if api_key:
                 {"input": user_input},
                 config={
                     "configurable": {"session_id":session_id}
-                },  # constructs a key "abc123" in `store`.
+                },
             )
-            st.write(st.session_state.store)
             st.write("Assistant:", response['answer'])
-            st.write("Chat History:", session_history.messages)
 else:
     st.warning("Please enter the GRoq API Key")
 
