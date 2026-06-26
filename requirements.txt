@@ -10,3 +10,4 @@ faiss-cpu
 streamlit 
 langchain-huggingface
 langchain-chroma
+sentence-transformers
